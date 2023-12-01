@@ -38,24 +38,14 @@ class Day0 extends Day {
         lines.forEach((line)=>{
             const regExp = /(?=(one|two|three|four|five|six|seven|eight|nine|\d)){1}/g;
             const matches = Array.from(line.matchAll(regExp), (match) => match[1]);
-            const firstMatch = matches.at(0)
-            const secondMatch = matches.at(matches.length -1 )
+            const firstMatch = matches[0];
+            const secondMatch = matches[matches.length - 1];
 
-            if(firstMatch && secondMatch) {
-                let firstNum = parseInt(firstMatch)
-                let secondNum = parseInt(secondMatch)
-                if(isNaN(firstNum)) {
-                    firstNum = digits[firstMatch]
-                } 
-                
-                if(isNaN(secondNum)){
-                    secondNum = digits[secondMatch]
-                }
-                
-                const calibrationValue = (firstNum*10) + secondNum
+            const firstNum = isNaN(parseInt(firstMatch)) ? digits[firstMatch] : parseInt(firstMatch);
+            const secondNum = isNaN(parseInt(secondMatch)) ? digits[secondMatch] : parseInt(secondMatch);
 
-                count+=calibrationValue
-            }   
+            const calibrationValue = (firstNum * 10) + secondNum;
+            count += calibrationValue; 
         })
 
         return `${count}`;
